@@ -68,7 +68,7 @@ Because the return size is known in advance, there is no need to use the returnd
 - where to write output
 - size of the output
 
-In the code below, we write the uint256 to memory then pass it to address 2 for hashing.
+In the code below, we write the [uint256](https://www.rareskills.io/post/uint-max-value-solidity) to memory then pass it to address 2 for hashing.
 
 ```solidity
 function hashSha256Yul(uint256 numberToHash) public view returns (bytes32) {
@@ -98,6 +98,20 @@ Signing messages with RSA works in reverse. The sender raises the hash of the me
 Ethereum does not have a public key infrastructure for RSA. However, an Ethereum address could prove ownership of an RSA public key by RSA signing their Ethereum address. Note this doesn’t work in reverse. ECDSA signing an RSA public key isn’t secure because anyone can ECDSA sign an arbitrary string, including RSA public keys.
 
 You can see an application for [RSA with solidity](https://www.rareskills.io/post/solidity-rsa-signatures-for-aidrops-and-presales-beating-ecdsa-and-merkle-trees-in-gas-efficiency) on our other article on the subject.
+
+Here is an example of using `modExp` with uint256 in Solidity:
+```solidity
+function modExp(uint256 base, uint256 exp, uint256 mod)
+		public
+		view
+		returns (uint256) {
+		
+		bytes memory precompileData = abi.encode(32, 32, 32, base, exp, mod);
+    (bool ok, bytes memory data) = address(5).staticcall(precompileData);
+    require(ok, "expMod failed");
+    return abi.decode(data, (uint256));
+}
+```
 
 ## Address 0x06 and 0x07 and 0x08: ecAdd, ecMul, and ecPairing (EIP-196 and EIP-197)
 
