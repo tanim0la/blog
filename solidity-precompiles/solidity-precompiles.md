@@ -101,12 +101,8 @@ You can see an application for [RSA with solidity](https://www.rareskills.io/pos
 
 Here is an example of using `modExp` with uint256 in Solidity:
 ```solidity
-function modExp(uint256 base, uint256 exp, uint256 mod)
-		public
-		view
-		returns (uint256) {
-		
-		bytes memory precompileData = abi.encode(32, 32, 32, base, exp, mod);
+function modExp(uint256 base, uint256 exp, uint256 mod) public view returns (uint256) {		
+    bytes memory precompileData = abi.encode(32, 32, 32, base, exp, mod);
     (bool ok, bytes memory data) = address(5).staticcall(precompileData);
     require(ok, "expMod failed");
     return abi.decode(data, (uint256));
