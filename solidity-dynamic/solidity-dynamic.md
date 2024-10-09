@@ -413,7 +413,6 @@ contract MyNestedArray {
 }
 ```
 
-w
 
 Suppose we want to find the storage slot that holds the element `8` in the array `[[2,9,6,3],[7,4,8,10]]` in the contract above. 
 
