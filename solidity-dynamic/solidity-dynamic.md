@@ -218,9 +218,8 @@ Since `num` is of type [uint256](https://www.rareskills.io/post/uint-max-value-s
 
 The animation below shows how storage slots are allocated to each variable, detailing how the values in each storage variable are stored in slots.
 
-<!-- <video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/solidity-iii/keccakanimr2_2.mp4" type="video/mp4" autoplay loop muted controls></video> -->
+<video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/solidity-iii/storageslottanim.mp4" type="video/mp4" autoplay loop muted controls></video>
 
-[storageslottanim.mp4](Storage%20Slot%20III%20(Complex%20Types)%20014edaa89e9d478585851a1f6f9b4c77/storageslottanim.mp4)
 
 Let's look at another example, similar to the previous one, but this time using `uint32` as the data type for the array:
 
@@ -242,9 +241,8 @@ If the type of each array element **doesn't** occupy an entire storage slot, lik
 
 How packed values are allocated slot:
 
-<!-- <video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/solidity-iii/keccakanimr2_2.mp4" type="video/mp4" autoplay loop muted controls></video> -->
+<video src="https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/solidity-iii/storageslottanim2_2.mp4" type="video/mp4" autoplay loop muted controls></video>
 
-[storageslottanim2 (2).mp4](Storage%20Slot%20III%20(Complex%20Types)%20014edaa89e9d478585851a1f6f9b4c77/storageslottanim2_(2).mp4)
 
 Note: Accessing a packed element will incur more gas since the EVM needs to add additional instructions other than the usual `sload`. It is only advisable to pack your elements if they are typically accessed in the same transaction and thus can share cold load costs.
 
@@ -266,8 +264,7 @@ Array values are kept in storage slots sequentially, with each storage slot bein
 
 The keccak hash of the slot `2` points to the slot holding the first element, then we keep adding 1 to that value to get the storage locations of other indexes in the array:
 
-<!-- not found -->
-![storageslothash_ManimCE_v0.18.1 (3).png](Storage%20Slot%20III%20(Complex%20Types)%20014edaa89e9d478585851a1f6f9b4c77/storageslothash_ManimCE_v0.18.1_(3).png)
+![A diagram showing the keccak hash of a slot](https://pub-32882f615aa84e4a94e1279ccf3ab85a.r2.dev/solidity-iii/storageslothash_ManimCE_v0181_3.png)
 
 Storage slots are numbered from 0 to 2²⁵⁶ - 1, and that is exactly the range of values a keccak256 outputs. The first red value in the image (`0x405787...5ace`) represents the hashed storage location derived from slot `2`, which holds the first element of the array. Each subsequent value (`0x405787...5acf`, `0x405787...5ad0`) is an increment of the previous one, corresponding to the next element in the array. This pattern continues for each additional element, with the storage location incrementing sequentially based on the array’s size.
 
@@ -412,7 +409,6 @@ contract MyNestedArray {
     }
 }
 ```
-
 
 Suppose we want to find the storage slot that holds the element `8` in the array `[[2,9,6,3],[7,4,8,10]]` in the contract above. 
 
